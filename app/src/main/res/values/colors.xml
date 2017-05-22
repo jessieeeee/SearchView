@@ -3,9 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="default_line">#cccccc</color>
-    <color name="default_blue">#00b5c8</color>
-    <color name="white">#ffffff</color>
-    <color name="default_et_hint">#c0c0c0</color>
-
+    <color name="default_black">#333333</color>
+    <color name="bg">#f2f2f2</color>
 </resources>

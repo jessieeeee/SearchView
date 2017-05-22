@@ -1,4 +1,4 @@
-package searchview.jessie.com.searchview;
+package searchview.jessie.com.searchviewlib;
 
 import android.content.Context;
 import android.os.Handler;
