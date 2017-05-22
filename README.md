@@ -3,12 +3,14 @@ a libiary for android that makes developers fast create custom searchview
 
 ## Using library in your application
 ### Step 1. Add the JitPack repository to your build file
+
  	  repositories {
  			...
  			maven { url 'https://jitpack.io' }
  		}
  	 }
 ### Step 2. Add the dependency
+
 	dependencies {
 	        compile 'com.github.jessieeeee:SearchView:v1.0'
 	}
