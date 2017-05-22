@@ -3,6 +3,11 @@ package searchview.jessie.com.searchview;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import searchview.jessie.com.searchviewlib.SearchView;
 
@@ -11,21 +16,26 @@ import static searchview.jessie.com.searchview.R.id.sc_content;
 public class MainActivity extends AppCompatActivity {
 
     private SearchView searchView;
-     private ResultFragment resultFragment;
+    private ResultFragment resultFragment;
+    private List<NewsDTO> newsDTOs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
+        initFragment();
+        buildData();
+//        doSearch();
     }
 
 
-    private void findView(){
-        searchView= (SearchView) this.findViewById(sc_content);
+    private void findView() {
+        searchView = (SearchView) this.findViewById(sc_content);
         searchView.setSearchEvent(new SearchView.searchEvent() {
             @Override
             public void onSearch() {
-                doSearch(true);
+                doSearch();
             }
 
             @Override
@@ -35,9 +45,40 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void doSearch(boolean isClear) {
+    public void doSearch() {
         String searchContent = searchView.getText().toString().trim();
-        resultFragment.setResult();
+        resultFragment.setResult(search(searchContent));
+    }
+
+    private List<NewsDTO> search(String key) {
+        List<NewsDTO> result=new ArrayList<>();
+        if(TextUtils.isEmpty(key)){
+            return newsDTOs;
+        }
+        Iterator<NewsDTO> iterator=newsDTOs.iterator();
+        while(iterator.hasNext()){
+            NewsDTO newsDTO=iterator.next();
+            if(newsDTO.getTitle().contains(key)){
+                result.add(newsDTO);
+            }
+            else if(newsDTO.getDetail().contains(key)){
+                result.add(newsDTO);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 模拟数据
+     */
+    private void buildData() {
+        newsDTOs =new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            NewsDTO newsDTO = new NewsDTO();
+            newsDTO.setTitle("title content关键字内容" + i);
+            newsDTO.setDetail("detail content详情内容" + i);
+            newsDTOs.add(newsDTO);
+        }
     }
 
     public void initFragment() {

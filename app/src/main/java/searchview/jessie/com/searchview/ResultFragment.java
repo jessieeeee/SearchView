@@ -22,7 +22,6 @@ import java.util.List;
 
 public class ResultFragment extends Fragment {
     public int page = 1;//当前页数
-    private List<NewsDTO> newsDTOs;
     private RecyclerView rv_main;
     private ResultListAdapter resultListAdapter;
     @Nullable
@@ -31,8 +30,6 @@ public class ResultFragment extends Fragment {
         View contentView=inflater.inflate(R.layout.fragment_result, container, false);
         rv_main= (RecyclerView) contentView.findViewById(R.id.rv_main);
         initRecycleView();
-        buildData();
-        setResult(newsDTOs);
         return contentView;
     }
 
@@ -44,21 +41,8 @@ public class ResultFragment extends Fragment {
         rv_main.setAdapter(resultListAdapter);
     }
 
-    /**
-     * 模拟数据
-     */
-    private void buildData(){
-        for (int i=0;i<20;i++){
-            NewsDTO newsDTO=new NewsDTO();
-            newsDTO.setTitle("title content关键字内容"+i);
-            newsDTO.setDetail("detail content详情内容"+i);
-            newsDTOs.add(newsDTO);
-        }
-    }
-
     //刷新列表
     public void setResult(List<NewsDTO> newsDTOs){
-        this.newsDTOs=newsDTOs;
         resultListAdapter.setData(newsDTOs);
     }
 }
