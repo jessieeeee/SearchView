@@ -16,7 +16,7 @@ import java.util.List;
  * @author JessieK
  * @date 2017/5/10 0010
  * @email lyj1246505807@gmail.com
- * @description
+ * @description show result fragment
  */
 
 
@@ -30,6 +30,7 @@ public class ResultFragment extends Fragment {
         View contentView=inflater.inflate(R.layout.fragment_result, container, false);
         rv_main= (RecyclerView) contentView.findViewById(R.id.rv_main);
         initRecycleView();
+        setResult(((MainActivity)getActivity()).buildData());
         return contentView;
     }
 

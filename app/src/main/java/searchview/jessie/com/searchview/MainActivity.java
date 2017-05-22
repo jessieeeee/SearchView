@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findView();
         initFragment();
+        newsDTOs =new ArrayList<>();
         buildData();
-//        doSearch();
     }
-
 
     private void findView() {
         searchView = (SearchView) this.findViewById(sc_content);
+        searchView.setDelBtn(R.drawable.sl_del_content);
         searchView.setSearchEvent(new SearchView.searchEvent() {
             @Override
             public void onSearch() {
@@ -71,14 +71,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 模拟数据
      */
-    private void buildData() {
-        newsDTOs =new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            NewsDTO newsDTO = new NewsDTO();
-            newsDTO.setTitle("title content关键字内容" + i);
-            newsDTO.setDetail("detail content详情内容" + i);
-            newsDTOs.add(newsDTO);
+    public List<NewsDTO> buildData() {
+        if(newsDTOs.size()==0){
+            for (int i = 0; i < 100; i++) {
+                NewsDTO newsDTO = new NewsDTO();
+                newsDTO.setTitle("title content关键字内容" + i);
+                newsDTO.setDetail("detail content详情内容" + i);
+                newsDTOs.add(newsDTO);
+            }
         }
+        return newsDTOs;
     }
 
     public void initFragment() {

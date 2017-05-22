@@ -12,7 +12,7 @@ import java.util.List;
  * @author JessieK
  * @date 2017/5/22 0022
  * @email lyj1246505807@gmail.com
- * @description
+ * @description set result adapter
  */
 
 

@@ -1,6 +1,7 @@
 package searchview.jessie.com.searchviewlib;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -19,14 +20,14 @@ import android.widget.LinearLayout;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
- * Description: 搜索组件
- * <p>
- * Author: yi.zhang
- * Time: 2016/10/20 0012 15:15
- * E-mail: yi.zhang@rato360.com
- */
+ * @date :2017/5/22 0022
+ * @author :JessieK
+ * @email :lyj1246505807@gmail.com
+ * @description : custom searchview
+ */ 
+
+
 public class SearchView extends LinearLayout implements  View.OnKeyListener {
 
     public ImageView ib;
@@ -63,13 +64,24 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
         initView();
     }
 
-
+    //设置搜索提示文字
     public void setHint(String str) {
         et.setHint(str);
     }
 
+    //设置是否显示返回按钮
     public void setBackGone() {
         iback.setVisibility(GONE);
+    }
+
+    //设置删除按钮
+    public void setDelBtn(Drawable drawable){
+        ib.setImageDrawable(drawable);
+    }
+
+    //设置删除按钮
+    public void setDelBtn(int id){
+        ib.setImageResource(id);
     }
 
     private void initView() {
@@ -162,14 +174,14 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     };
 
     // 设置按钮不可见
-    public void hideBtn() {
+    private void hideBtn() {
 
         if (ib.isShown())
             ib.setVisibility(View.GONE);
     }
 
     // 设置按钮可见
-    public void showBtn() {
+    private void showBtn() {
         if (!ib.isShown())
             ib.setVisibility(View.VISIBLE);
     }
@@ -188,7 +200,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
         return false;
     }
 
-
+    //过滤emoji表情
     private static InputFilter emojiFilter = new InputFilter() {
         Pattern emoji = Pattern.compile(
                 "[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
