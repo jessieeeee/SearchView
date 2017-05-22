@@ -9,6 +9,7 @@ a libiary for android that makes developers fast create custom searchview
  			maven { url 'https://jitpack.io' }
  		}
  	 }
+ 	 
 ### Step 2. Add the dependency
 
 	dependencies {
@@ -23,6 +24,7 @@ a libiary for android that makes developers fast create custom searchview
          android:id="@+id/sc_content"
          android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+      
          
 2. Java code set callback
 
