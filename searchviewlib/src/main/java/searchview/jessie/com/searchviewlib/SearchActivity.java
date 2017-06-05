@@ -72,12 +72,7 @@ public abstract class SearchActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    /**
-     * 清除editText的焦点
-     *
-     * @param v   焦点所在View
-     * @param views 输入框
-     */
+    //清除焦点
     public void clearViewFocus(View v, View... views) {
         if (null != v && null != views && views.length > 0) {
             for (View view : views) {
@@ -89,6 +84,7 @@ public abstract class SearchActivity extends AppCompatActivity {
         }
     }
 
+    //得到焦点
     public void getViewFocus(View v, View... views) {
         if (null != v && null != views && views.length > 0) {
             for (View view : views) {
@@ -101,13 +97,7 @@ public abstract class SearchActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 隐藏键盘
-     *
-     * @param v   焦点所在View
-     * @param views 输入框
-     * @return true代表焦点在edit上
-     */
+    //view是否得到焦点
     public boolean isFocusEditText(View v, View... views) {
         if (v instanceof EditText) {
             EditText tmp_et = (EditText) v;
@@ -121,7 +111,7 @@ public abstract class SearchActivity extends AppCompatActivity {
     }
 
 
-    //是否触摸在指定view上面,对某个控件过滤
+    //是否触摸在指定view上面
     public boolean isTouchView(View[] views, MotionEvent ev) {
         if (views == null || views.length == 0) return false;
         int[] location = new int[2];
@@ -137,21 +127,23 @@ public abstract class SearchActivity extends AppCompatActivity {
         return false;
     }
 
-
+   //隐藏键盘逻辑
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (isTouchView(filterViewByIds(), ev))
+            View v = getCurrentFocus();            //得到当前activity的焦点view
+            if (isTouchView(filterViewByIds(), ev)) //触摸到不隐藏键盘的view不做处理
                 return super.dispatchTouchEvent(ev);
-            if(isTouchView(hideSoftByEditViewIds(), ev)){
+            if(isTouchView(hideSoftByEditViewIds(), ev)){//触摸到隐藏键盘的view不做处理
                 getViewFocus(v,hideSoftByEditViewIds());
                 return super.dispatchTouchEvent(ev);
             }
+            //触摸到其它view
             if (hideSoftByEditViewIds() == null || hideSoftByEditViewIds().length == 0)
                 return super.dispatchTouchEvent(ev);
-
+            // view得到了焦点
             if (isFocusEditText(v, hideSoftByEditViewIds())) {
+                //清除隐藏键盘的view焦点
                 clearViewFocus(v, hideSoftByEditViewIds());
                 //隐藏键盘
                 InputMethodUtils.hideKeyBoard(this);
@@ -161,24 +153,14 @@ public abstract class SearchActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 传入EditText的Id
-     * 没有传入的EditText不做处理
-     *
-     * @return id 数组
-     */
+    //传入EditText的Id,隐藏对应的键盘
     public View[] hideSoftByEditViewIds() {
         View[] views = {searchView.getEditView()};
         return views;
     }
 
 
-    /**
-     * 传入要过滤的View
-     * 过滤之后点击将不会有隐藏软键盘的操作
-     *
-     * @return id 数组
-     */
+    //传入要过滤的View,过滤之后点击将不会有隐藏软键盘的操作
     public View[] filterViewByIds() {
         return null;
     }

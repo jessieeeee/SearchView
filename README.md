@@ -19,10 +19,14 @@ a libiary for android that makes developers fast create custom searchview
 ### How to Use
 1. xml layout reference
 
-`<searchview.jessie.com.searchviewlib.SearchView
+<searchview.jessie.com.searchviewlib.SearchView
+
       android:id="@+id/sc_content"
+      
       android:layout_width="match_parent"
-     android:layout_height="wrap_content"/>`
+      
+     android:layout_height="wrap_content"/>
+         
          
 2. Java code set callback
 
