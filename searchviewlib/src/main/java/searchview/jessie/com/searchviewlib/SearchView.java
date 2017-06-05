@@ -1,7 +1,7 @@
 package searchview.jessie.com.searchviewlib;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -37,11 +37,82 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     public AutoCompleteTextView et;
     public Button search;
     public searchEvent searchEvent;
+    public LinearLayout layContentSearch;
+    public ImageView ivTag;
     private long lastTime;//上一次时间记录
-    public void setSearchEvent(SearchView.searchEvent searchEvent) {
-        this.searchEvent = searchEvent;
+    public int intervalTime=1000;//搜索间隔时间
+
+    //设置间隔时间
+    public SearchView setIntervalTime(int intervalTime){
+        this.intervalTime=intervalTime;
+        return this;
     }
 
+    //设置背景颜色
+    public SearchView setBackGroundColor(int color){
+        layContentSearch.setBackgroundColor(color);
+        return this;
+    }
+
+    //设置返回按钮
+    public SearchView setBackIcon(int resId){
+        iback.setImageResource(resId);
+        return this;
+    }
+
+    //设置搜索图标
+    public SearchView setTagIcon(int resId){
+        ivTag.setImageResource(resId);
+        return this;
+    }
+
+    //设置删除图标
+    public SearchView setDelIcon(int resId){
+        ib.setImageResource(resId);
+        return this;
+    }
+
+    //设置搜索文本
+    public SearchView setSearchText(String text){
+        search.setText(text);
+        return this;
+    }
+
+    //设置搜索文本颜色
+    public SearchView setSearchTextColor(int color){
+        search.setTextColor(color);
+        return this;
+    }
+
+    //设置搜索文本背景图片
+    public SearchView setSearchBackground(int resId){
+        search.setBackgroundResource(resId);
+        return this;
+    }
+
+    //设置搜索文本背景颜色
+    public SearchView setSearchBackgroundColor(int color){
+        search.setBackgroundColor(color);
+        return this;
+    }
+
+    //设置搜索框提示文本
+    public SearchView setSearchHintText(String hintText){
+        search.setHint(hintText);
+        return this;
+    }
+
+    //设置搜索框提示文本颜色
+    public SearchView setSearchHintTextColor(int color){
+        search.setHintTextColor(color);
+        return this;
+    }
+
+    //实现搜索和返回接口
+    public SearchView setSearchEvent(SearchView.searchEvent searchEvent) {
+        this.searchEvent = searchEvent;
+        return this;
+    }
 
     public interface OnTextChangedListener {
         void onTextChanged(Editable s, int length);
@@ -63,7 +134,21 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     public SearchView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.widget_search_et_btn, this, true);
+        TypedArray a = context.obtainStyledAttributes(attrs,
+                R.styleable.SearchView);
         initView();
+        intervalTime=a.getInt(R.styleable.SearchView_intervalTime,1000);
+        setBackGroundColor(a.getColor(R.styleable.SearchView_backgroundColor,getResources().getColor(R.color.default_blue)));
+        setBackIcon(a.getResourceId(R.styleable.SearchView_backIcon,R.drawable.ic_title_back_white));
+        setTagIcon(a.getResourceId(R.styleable.SearchView_tagIcon,R.drawable.ic_content_search));
+        setDelIcon(a.getResourceId(R.styleable.SearchView_delIcon,R.drawable.sl_del_content));
+        setSearchText(a.getString(R.styleable.SearchView_searchText));
+        setSearchTextColor(a.getColor(R.styleable.SearchView_searchTextColor,getResources().getColor(R.color.white)));
+        setSearchBackground(a.getResourceId(R.styleable.SearchView_searchBackground,android.R.color.transparent));
+        setSearchBackgroundColor(a.getColor(R.styleable.SearchView_searchBackgroundColor,getResources().getColor(android.R.color.transparent)));
+        setSearchHintText(a.getString(R.styleable.SearchView_searchHintText));
+        setSearchHintTextColor(a.getColor(R.styleable.SearchView_searchHintTextColor,getResources().getColor(R.color.default_line)));
+
     }
 
 
@@ -71,25 +156,11 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
         return  et;
     }
 
-    //设置搜索提示文字
-    public void setHint(String str) {
-        et.setHint(str);
-    }
-
     //设置是否显示返回按钮
     public void setBackGone() {
         iback.setVisibility(GONE);
     }
 
-    //设置删除按钮
-    public void setDelBtn(Drawable drawable){
-        ib.setImageDrawable(drawable);
-    }
-
-    //设置删除按钮
-    public void setDelBtn(int id){
-        ib.setImageResource(id);
-    }
 
     public void setKeyListAdapter(ArrayList<String> keyList){
         AutoComplateSearchAdapter autoComplateAdapter = new AutoComplateSearchAdapter(getContext(),keyList);
@@ -97,6 +168,8 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     }
 
     private void initView() {
+        layContentSearch= (LinearLayout) findViewById(R.id.lay_content_search);
+        ivTag= (ImageView) findViewById(R.id.iv_tag);
         ib = (ImageView) findViewById(R.id.iv_del_content);
         iback = (ImageView) findViewById(R.id.iv_back);
         iback.setOnClickListener(new OnClickListener() {
@@ -182,7 +255,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
 
 
             //增加输入文字变化的搜索
-            if(System.currentTimeMillis()-lastTime>1000){
+            if(System.currentTimeMillis()-lastTime>intervalTime){
                 searchEvent.onSearch();
             }
 

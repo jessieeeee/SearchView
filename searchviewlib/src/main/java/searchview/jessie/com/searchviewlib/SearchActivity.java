@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 
 public abstract class SearchActivity extends AppCompatActivity {
-    private SearchView searchView;
-    private ResultFragment resultFragment;
+    protected SearchView searchView;
+    protected ResultFragment resultFragment;
 
     //search to do 搜索逻辑
     protected abstract void doSearch();
@@ -35,7 +35,7 @@ public abstract class SearchActivity extends AppCompatActivity {
     //bind searchview 绑定searchview
     protected void findSearchView(int searchViewId) {
         searchView = (SearchView) this.findViewById(searchViewId);
-        searchView.setDelBtn(R.drawable.sl_del_content);
+        searchView.setDelIcon(R.drawable.sl_del_content);
         searchView.setSearchEvent(new SearchView.searchEvent() {
             @Override
             public void onSearch() {

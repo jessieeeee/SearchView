@@ -28,8 +28,23 @@ public class MainActivity extends SearchActivity {
         findSearchView(R.id.sc_content);
         //设置搜索关键字自动补全
         setKeyListAdapter(setKeyList());
+        setSearchView();
     }
 
+    //custom searchview ui 自定义searchview的外观
+    public void setSearchView(){
+        searchView.setIntervalTime(1000)
+                  .setBackGroundColor(getResources().getColor(R.color.default_blue))
+                  .setBackIcon(R.drawable.ic_title_back_white)
+                  .setTagIcon(R.drawable.ic_content_search)
+                  .setDelIcon(R.drawable.sl_del_content)
+                  .setSearchText(getString(R.string.text_search))
+                  .setSearchTextColor(getResources().getColor(R.color.white))
+                  .setSearchBackground(getResources().getColor(android.R.color.transparent))
+                  .setSearchBackgroundColor(getResources().getColor(android.R.color.transparent))
+                  .setSearchHintText(getString(R.string.hint_input_search))
+                  .setSearchHintTextColor(getResources().getColor(R.color.default_line));
+    }
     //设置搜索关键字自动补全
     public ArrayList<String> setKeyList(){
         ArrayList<String> keys=new ArrayList<>();

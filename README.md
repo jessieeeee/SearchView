@@ -1,6 +1,6 @@
 # SearchView 
 a libiary for android that makes developers fast create custom searchview 
-- ![image](https://github.com/jessieeeee/SearchView/blob/87c9495da179a955e0172944b13e01c3df5d393a/example.gif)
+- ![image](https://github.com/jessieeeee/SearchView/blob/master/example.gif)
 ## Using library in your application
 ### Step 1. Add the JitPack repository to your build file
 <pre>
