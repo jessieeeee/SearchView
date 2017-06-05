@@ -38,7 +38,7 @@
             android:layout_marginLeft="8dp"
             android:src="@drawable/ic_content_search"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/et_content_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,12 +46,12 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="25dp"
             android:layout_toRightOf="@+id/iv_tag"
             android:background="@null"
             android:ems="10"
             android:hint="@string/hint_input_search"
             android:imeOptions="actionSearch"
+            android:textCursorDrawable="@drawable/cursor_blue"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/default_blue"
@@ -59,7 +59,7 @@
             android:textSize="13sp">
 
             <requestFocus/>
-        </EditText>
+        </AutoCompleteTextView>
 
         <ImageView
             android:id="@+id/iv_del_content"

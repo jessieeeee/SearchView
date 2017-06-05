@@ -15,18 +15,15 @@
 
     <ImageView
         android:id="@+id/img_content_line"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/sc_content"
         android:background="@color/default_line"
         />
 
-
     <LinearLayout
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
     </LinearLayout>
 </LinearLayout>

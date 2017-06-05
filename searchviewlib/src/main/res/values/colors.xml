@@ -4,4 +4,5 @@
     <color name="default_blue">#00b5c8</color>
     <color name="white">#ffffff</color>
     <color name="default_et_hint">#c0c0c0</color>
+    <color name="bg">#f2f2f2</color>
 </resources>

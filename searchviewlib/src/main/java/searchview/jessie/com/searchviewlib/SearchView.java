@@ -12,11 +12,13 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
 
     public ImageView ib;
     public ImageView iback;
-    public EditText et;
+    public AutoCompleteTextView et;
     public Button search;
     public searchEvent searchEvent;
     private long lastTime;//上一次时间记录
@@ -64,6 +66,11 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
         initView();
     }
 
+
+    public EditText getEditView(){
+        return  et;
+    }
+
     //设置搜索提示文字
     public void setHint(String str) {
         et.setHint(str);
@@ -84,6 +91,11 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
         ib.setImageResource(id);
     }
 
+    public void setKeyListAdapter(ArrayList<String> keyList){
+        AutoComplateSearchAdapter autoComplateAdapter = new AutoComplateSearchAdapter(getContext(),keyList);
+        et.setAdapter(autoComplateAdapter);
+    }
+
     private void initView() {
         ib = (ImageView) findViewById(R.id.iv_del_content);
         iback = (ImageView) findViewById(R.id.iv_back);
@@ -93,10 +105,15 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
                 searchEvent.back();
             }
         });
-        et = (EditText) findViewById(R.id.et_content_search);
+        et = (AutoCompleteTextView) findViewById(R.id.et_content_search);
         et.setFilters(new InputFilter[]{emojiFilter});
         setOnKeyListener(this);
         et.addTextChangedListener(tw);// 为输入框绑定一个监听文字变化的监听器
+
+        et.setDropDownHeight(600);
+        et.setDropDownWidth(600);
+        et.setThreshold(3);
+
         // 添加按钮点击事件
         ib.setOnClickListener(new OnClickListener() {
             @Override
