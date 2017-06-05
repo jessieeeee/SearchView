@@ -19,27 +19,27 @@ a libiary for android that makes developers fast create custom searchview
 ### How to Use
 1. xml layout reference
 
-    <searchview.jessie.com.searchviewlib.SearchView
+        <searchview.jessie.com.searchviewlib.SearchView
     
-        android:id="@+id/sc_content"
-        
-        android:layout_width="match_parent"
-        
-        android:layout_height="wrap_content"
-        
-        jessie:intervalTime="2000"
-        
-        jessie:backIcon="@drawable/ic_title_back_white"
-        
-        jessie:backgroundColor="@color/default_blue"
-        
-        jessie:tagIcon="@drawable/ic_content_search"
-        
-        jessie:delIcon="@drawable/sl_del_content"
-        
-        jessie:searchText="@string/text_search"
-        
-        jessie:searchTextColor="@color/white"
+            android:id="@+id/sc_content"
+            
+            android:layout_width="match_parent"
+            
+            android:layout_height="wrap_content"
+            
+            jessie:intervalTime="2000"
+            
+            jessie:backIcon="@drawable/ic_title_back_white"
+            
+            jessie:backgroundColor="@color/default_blue"
+            
+            jessie:tagIcon="@drawable/ic_content_search"
+            
+            jessie:delIcon="@drawable/sl_del_content"
+            
+            jessie:searchText="@string/text_search"
+            
+            jessie:searchTextColor="@color/white"
         
         jessie:searchHintText="@string/hint_input_search"/>
          
@@ -47,27 +47,28 @@ a libiary for android that makes developers fast create custom searchview
 2. Java code set callback
  - you must extends SearchActivity , realize abstract method
 
-     //搜索逻辑
-     public void doSearch() {
-         resultListAdapter.setData(search(getSearchContent()));
-     }
-     
-     @Override
-     protected RecyclerView.Adapter setResultListAdapter() {
-         //bind data 绑定数据和适配器
-         resultListAdapter=new ResultListAdapter();
-         resultListAdapter.setData(newsDTOs);
-         return resultListAdapter;
-     }
+         //搜索逻辑
+         public void doSearch() {
+             resultListAdapter.setData(search(getSearchContent()));
+         }
+         
+         @Override
+         protected RecyclerView.Adapter setResultListAdapter() {
+             //bind data 绑定数据和适配器
+             resultListAdapter=new ResultListAdapter();
+             resultListAdapter.setData(newsDTOs);
+             return resultListAdapter;
+         }
 
  - next, init result fragment , bind searchview , set search content Completion and custom ui
   
-     initResultFragment(R.id.ll_content);
-     findSearchView(R.id.sc_content);
-     setKeyListAdapter(setKeyList());
-     setSearchView();
+        initResultFragment(R.id.ll_content);
+        findSearchView(R.id.sc_content);
+        setKeyListAdapter(setKeyList());
+        setSearchView();
          
  - you can custom searchview ui
+ 
         public void setSearchView(){
             searchView.setIntervalTime(1000)
                       .setBackGroundColor(getResources().getColor(R.color.default_blue))
