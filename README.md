@@ -17,7 +17,7 @@ a libiary for android that makes developers fast create custom searchview
 	}
 </pre>
 ### How to Use
-1. xml layout reference
+1. xml layout reference , custom searchview ui
 
         <searchview.jessie.com.searchviewlib.SearchView
     
@@ -44,7 +44,7 @@ a libiary for android that makes developers fast create custom searchview
             jessie:searchHintText="@string/hint_input_search"/>
          
          
-2. Java code set callback
+2. Java code reference
  - you must extends SearchActivity , realize abstract method
 
          //搜索逻辑
@@ -67,7 +67,7 @@ a libiary for android that makes developers fast create custom searchview
         setKeyListAdapter(setKeyList());
         setSearchView();
          
- - you can custom searchview ui
+ - also can custom searchview ui
  
         public void setSearchView(){
             searchView.setIntervalTime(1000)
