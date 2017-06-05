@@ -41,7 +41,7 @@ a libiary for android that makes developers fast create custom searchview
             
             jessie:searchTextColor="@color/white"
         
-        jessie:searchHintText="@string/hint_input_search"/>
+            jessie:searchHintText="@string/hint_input_search"/>
          
          
 2. Java code set callback
