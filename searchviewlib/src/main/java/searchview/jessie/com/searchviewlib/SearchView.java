@@ -170,6 +170,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
         ivTag= (ImageView) findViewById(R.id.iv_tag);
         ib = (ImageView) findViewById(R.id.iv_del_content);
         iback = (ImageView) findViewById(R.id.iv_back);
+        //返回键监听
         iback.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,6 +178,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
             }
         });
         et = (AutoCompleteTextView) findViewById(R.id.et_content_search);
+        //过滤emoji
         et.setFilters(new InputFilter[]{emojiFilter});
         setOnKeyListener(this);
         et.addTextChangedListener(tw);// 为输入框绑定一个监听文字变化的监听器

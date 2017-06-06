@@ -28,14 +28,13 @@ public abstract class SearchActivity extends AppCompatActivity {
     protected abstract RecyclerView.Adapter setResultListAdapter();
 
     //return search content input
-    public String getSearchContent(){
+    protected String getSearchContent(){
         return searchView.getText().toString().trim();
     }
 
     //bind searchview 绑定searchview
     protected void findSearchView(int searchViewId) {
         searchView = (SearchView) this.findViewById(searchViewId);
-        searchView.setDelIcon(R.drawable.sl_del_content);
         searchView.setSearchEvent(new SearchView.searchEvent() {
             @Override
             public void onSearch() {
@@ -60,8 +59,13 @@ public abstract class SearchActivity extends AppCompatActivity {
         return new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, 10, getResources().getColor(R.color.bg));
     }
 
+    //set result list LayoutManager 设置RecyclerView的布局管理器
+    protected RecyclerView.LayoutManager setLayoutManager(){
+        return new LinearLayoutManager(this);
+    }
+
     //init result fragment 初始化结果分页
-    public void initResultFragment(int SearchFragmentId) {
+    protected void initResultFragment(int SearchFragmentId) {
         resultFragment = new ResultFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -73,7 +77,7 @@ public abstract class SearchActivity extends AppCompatActivity {
     }
 
     //清除焦点
-    public void clearViewFocus(View v, View... views) {
+    private void clearViewFocus(View v, View... views) {
         if (null != v && null != views && views.length > 0) {
             for (View view : views) {
                 if (v.getId() == view.getId()) {
@@ -85,7 +89,7 @@ public abstract class SearchActivity extends AppCompatActivity {
     }
 
     //得到焦点
-    public void getViewFocus(View v, View... views) {
+    private void getViewFocus(View v, View... views) {
         if (null != v && null != views && views.length > 0) {
             for (View view : views) {
                 if (v.getId() == view.getId()) {
@@ -98,7 +102,7 @@ public abstract class SearchActivity extends AppCompatActivity {
 
 
     //view是否得到焦点
-    public boolean isFocusEditText(View v, View... views) {
+    private boolean isFocusEditText(View v, View... views) {
         if (v instanceof EditText) {
             EditText tmp_et = (EditText) v;
             for (View view : views) {
@@ -112,7 +116,7 @@ public abstract class SearchActivity extends AppCompatActivity {
 
 
     //是否触摸在指定view上面
-    public boolean isTouchView(View[] views, MotionEvent ev) {
+    private boolean isTouchView(View[] views, MotionEvent ev) {
         if (views == null || views.length == 0) return false;
         int[] location = new int[2];
         for (View view : views) {
@@ -153,15 +157,15 @@ public abstract class SearchActivity extends AppCompatActivity {
 
     }
 
-    //传入EditText的Id,隐藏对应的键盘
-    public View[] hideSoftByEditViewIds() {
+    //传入Id,触摸到其它view时,隐藏此view对应的软键盘
+    protected View[] hideSoftByEditViewIds() {
         View[] views = {searchView.getEditView()};
         return views;
     }
 
 
-    //传入要过滤的View,过滤之后点击将不会有隐藏软键盘的操作
-    public View[] filterViewByIds() {
+    //传入要过滤的View,过滤之后将不会隐藏软键盘
+    protected View[] filterViewByIds() {
         return null;
     }
 

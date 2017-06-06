@@ -57,7 +57,7 @@ public class MainActivity extends SearchActivity {
     }
 
     //搜索逻辑
-    public void doSearch() {
+    protected void doSearch() {
         resultListAdapter.setData(search(getSearchContent()));
     }
 
@@ -91,7 +91,7 @@ public class MainActivity extends SearchActivity {
     /**
      * build data 模拟数据
      */
-    public List<NewsDTO> buildData() {
+    private List<NewsDTO> buildData() {
         if(newsDTOs==null){
             newsDTOs =new ArrayList<>();
         }

@@ -3,7 +3,6 @@ package searchview.jessie.com.searchviewlib;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import java.util.List;
 public class ResultFragment extends Fragment {
     public int page = 1;//当前页数
     private RecyclerView rv_main;
-    private RecyclerView.Adapter resultListAdapter;
     private List data;
     @Nullable
     @Override
@@ -34,12 +32,11 @@ public class ResultFragment extends Fragment {
         return contentView;
     }
 
-    //设置行程列表
+    //设置结果列表
     private void initRecycleView() {
-        rv_main.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv_main.setLayoutManager(((SearchActivity)getActivity()).setLayoutManager());
         rv_main.addItemDecoration(((SearchActivity)getActivity()).setResultListDivider());
-        this.resultListAdapter=((SearchActivity)getActivity()).setResultListAdapter();
-        rv_main.setAdapter(resultListAdapter);
+        rv_main.setAdapter(((SearchActivity)getActivity()).setResultListAdapter());
     }
 
 

@@ -46,19 +46,6 @@ public class AutoComplateSearchAdapter extends BaseAdapter implements Filterable
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (position % 2 == 0) {
-            return 0;
-        }
-        return 1;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder holder;
