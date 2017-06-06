@@ -236,7 +236,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
             }
 
 
-            //增加输入文字变化的搜索
+            //输入文字变化时,超过间隔时间才搜索
             if(System.currentTimeMillis()-lastTime>intervalTime){
                 searchEvent.onSearch();
             }
