@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--权限控件-->
+    <!--searchview属性自定义-->
     <declare-styleable name="SearchView">
         <attr name="intervalTime" format="integer"/>
         <attr name="backgroundColor" format="color"/>
