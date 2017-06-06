@@ -2,7 +2,6 @@ package searchview.jessie.com.searchviewlib;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -11,7 +10,6 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -193,24 +191,6 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
             public void onClick(View v) {
                 hideBtn();// 隐藏按钮
                 et.setText("");// 设置输入框内容为空
-            }
-        });
-        // 添加按钮焦点事件
-        et.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                final boolean isFocus = hasFocus;
-                (new Handler()).postDelayed(new Runnable() {
-                    public void run() {
-                        InputMethodManager imm = (InputMethodManager) et.getContext()
-                            .getSystemService(Context.INPUT_METHOD_SERVICE);
-                        if (isFocus) {
-                            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                        } else {
-                            imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                        }
-                    }
-                }, 100);
             }
         });
         search= (Button) findViewById(R.id.btn_content_search);
