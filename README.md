@@ -20,27 +20,16 @@ a libiary for android that makes developers fast create custom searchview
 1. xml layout reference , custom searchview ui
 ```xml
 <searchview.jessie.com.searchviewlib.SearchView
-
     android:id="@+id/sc_content"
-    
     android:layout_width="match_parent"
-    
     android:layout_height="wrap_content"
-    
     jessie:intervalTime="2000"
-    
     jessie:backIcon="@drawable/ic_title_back_white"
-    
     jessie:backgroundColor="@color/default_blue"
-    
     jessie:tagIcon="@drawable/ic_content_search"
-    
     jessie:delIcon="@drawable/sl_del_content"
-    
     jessie:searchText="@string/text_search"
-    
     jessie:searchTextColor="@color/white"
-
     jessie:searchHintText="@string/hint_input_search"/>
 ```
 2. Java code reference
