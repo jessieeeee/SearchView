@@ -13,7 +13,7 @@ a libiary for android that makes developers fast create custom searchview
 ### Step 2. Add the dependency
 <pre>
 	dependencies {
-	        compile 'com.github.jessieeeee:SearchView:v1.0'
+	       compile 'com.github.jessieeeee:SearchView:v1.1'
 	}
 </pre>
 ### How to Use
