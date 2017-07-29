@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SearchViewLib</string>
+    <string name="hint_input_search">请输入关键字</string>
+    <string name="text_search">搜索</string>
+</resources>

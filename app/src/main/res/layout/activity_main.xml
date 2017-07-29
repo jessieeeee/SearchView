@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jessie="http://schemas.android.com/apk/res-auto"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--搜索框-->
+    <searchview.jessie.com.searchviewlib.SearchView
+        android:id="@+id/sc_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        jessie:intervalTime="2000"
+        jessie:backIcon="@drawable/ic_title_back_white"
+        jessie:backgroundColor="@color/default_blue"
+        jessie:tagIcon="@drawable/ic_content_search"
+        jessie:delIcon="@drawable/sl_del_content"
+        jessie:searchText="@string/text_search"
+        jessie:searchTextColor="@color/white"
+        jessie:searchHintText="@string/hint_input_search"/>
+
+    <ImageView
+        android:id="@+id/img_content_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/sc_content"
+        android:background="@color/default_line"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+</LinearLayout>

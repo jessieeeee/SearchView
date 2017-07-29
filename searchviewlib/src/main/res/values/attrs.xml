@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--searchview属性自定义-->
+    <declare-styleable name="SearchView">
+        <attr name="intervalTime" format="integer"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="backIcon" format="reference"/>
+        <attr name="tagIcon" format="reference"/>
+        <attr name="delIcon" format="reference"/>
+        <attr name="searchText" format="string"/>
+        <attr name="searchTextColor" format="color"/>
+        <attr name="searchBackground" format="reference"/>
+        <attr name="searchBackgroundColor" format="color"/>
+        <attr name="searchHintText" format="string"/>
+        <attr name="searchHintTextColor" format="color"/>
+
+    </declare-styleable>
+
+</resources>
