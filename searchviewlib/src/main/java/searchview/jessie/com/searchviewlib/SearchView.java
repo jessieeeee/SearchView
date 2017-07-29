@@ -22,14 +22,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @date :2017/5/22 0022
  * @author :JessieK
+ * @date :2017/5/22 0022
  * @email :lyj1246505807@gmail.com
  * @description : custom searchview
- */ 
+ */
 
 
-public class SearchView extends LinearLayout implements  View.OnKeyListener {
+public class SearchView extends LinearLayout implements View.OnKeyListener {
 
     public ImageView ib;
     public ImageView iback;
@@ -39,70 +39,71 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     public LinearLayout layContentSearch;
     public ImageView ivTag;
     private Handler handler;
-    public int intervalTime=1000;//搜索间隔时间
+    public int intervalTime = 1000;//搜索间隔时间
+    private long lastTime;//上次搜索时间
 
     //设置间隔时间
-    public SearchView setIntervalTime(int intervalTime){
-        this.intervalTime=intervalTime;
+    public SearchView setIntervalTime(int intervalTime) {
+        this.intervalTime = intervalTime;
         return this;
     }
 
     //设置背景颜色
-    public SearchView setBackGroundColor(int color){
+    public SearchView setBackGroundColor(int color) {
         layContentSearch.setBackgroundColor(color);
         return this;
     }
 
     //设置返回按钮
-    public SearchView setBackIcon(int resId){
+    public SearchView setBackIcon(int resId) {
         iback.setImageResource(resId);
         return this;
     }
 
     //设置搜索图标
-    public SearchView setTagIcon(int resId){
+    public SearchView setTagIcon(int resId) {
         ivTag.setImageResource(resId);
         return this;
     }
 
     //设置删除图标
-    public SearchView setDelIcon(int resId){
+    public SearchView setDelIcon(int resId) {
         ib.setImageResource(resId);
         return this;
     }
 
     //设置搜索文本
-    public SearchView setSearchText(String text){
+    public SearchView setSearchText(String text) {
         search.setText(text);
         return this;
     }
 
     //设置搜索文本颜色
-    public SearchView setSearchTextColor(int color){
+    public SearchView setSearchTextColor(int color) {
         search.setTextColor(color);
         return this;
     }
 
     //设置搜索文本背景图片
-    public SearchView setSearchBackground(int resId){
+    public SearchView setSearchBackground(int resId) {
         search.setBackgroundResource(resId);
         return this;
     }
 
     //设置搜索文本背景颜色
-    public SearchView setSearchBackgroundColor(int color){
+    public SearchView setSearchBackgroundColor(int color) {
         search.setBackgroundColor(color);
         return this;
     }
 
     //设置搜索框提示文本
-    public SearchView setSearchHintText(String hintText){
+    public SearchView setSearchHintText(String hintText) {
         search.setHint(hintText);
         return this;
     }
 
     //设置搜索框提示文本颜色
-    public SearchView setSearchHintTextColor(int color){
+    public SearchView setSearchHintTextColor(int color) {
         search.setHintTextColor(color);
         return this;
     }
@@ -118,11 +119,11 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     }
 
 
-    public interface searchEvent{
+    public interface searchEvent {
         void onSearch();
+
         void back();
     }
-
 
 
     public SearchView(Context context) {
@@ -132,28 +133,28 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
 
     public SearchView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        handler=new Handler();
+        handler = new Handler();
         LayoutInflater.from(context).inflate(R.layout.widget_search_et_btn, this, true);
         TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.SearchView);
         initView();
-        intervalTime=a.getInt(R.styleable.SearchView_intervalTime,1000);
-        setBackGroundColor(a.getColor(R.styleable.SearchView_backgroundColor,getResources().getColor(R.color.default_blue)));
-        setBackIcon(a.getResourceId(R.styleable.SearchView_backIcon,R.drawable.ic_title_back_white));
-        setTagIcon(a.getResourceId(R.styleable.SearchView_tagIcon,R.drawable.ic_content_search));
-        setDelIcon(a.getResourceId(R.styleable.SearchView_delIcon,R.drawable.sl_del_content));
+        intervalTime = a.getInt(R.styleable.SearchView_intervalTime, 1000);
+        setBackGroundColor(a.getColor(R.styleable.SearchView_backgroundColor, getResources().getColor(R.color.default_blue)));
+        setBackIcon(a.getResourceId(R.styleable.SearchView_backIcon, R.drawable.ic_title_back_white));
+        setTagIcon(a.getResourceId(R.styleable.SearchView_tagIcon, R.drawable.ic_content_search));
+        setDelIcon(a.getResourceId(R.styleable.SearchView_delIcon, R.drawable.sl_del_content));
         setSearchText(a.getString(R.styleable.SearchView_searchText));
-        setSearchTextColor(a.getColor(R.styleable.SearchView_searchTextColor,getResources().getColor(R.color.white)));
-        setSearchBackground(a.getResourceId(R.styleable.SearchView_searchBackground,android.R.color.transparent));
-        setSearchBackgroundColor(a.getColor(R.styleable.SearchView_searchBackgroundColor,getResources().getColor(android.R.color.transparent)));
+        setSearchTextColor(a.getColor(R.styleable.SearchView_searchTextColor, getResources().getColor(R.color.white)));
+        setSearchBackground(a.getResourceId(R.styleable.SearchView_searchBackground, android.R.color.transparent));
+        setSearchBackgroundColor(a.getColor(R.styleable.SearchView_searchBackgroundColor, getResources().getColor(android.R.color.transparent)));
         setSearchHintText(a.getString(R.styleable.SearchView_searchHintText));
-        setSearchHintTextColor(a.getColor(R.styleable.SearchView_searchHintTextColor,getResources().getColor(R.color.default_line)));
+        setSearchHintTextColor(a.getColor(R.styleable.SearchView_searchHintTextColor, getResources().getColor(R.color.default_line)));
 
     }
 
 
-    public EditText getEditView(){
-        return  et;
+    public EditText getEditView() {
+        return et;
     }
 
     //设置是否显示返回按钮
@@ -162,14 +163,14 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
     }
 
 
-    public void setKeyListAdapter(ArrayList<String> keyList){
-        AutoComplateSearchAdapter autoComplateAdapter = new AutoComplateSearchAdapter(getContext(),keyList);
+    public void setKeyListAdapter(ArrayList<String> keyList) {
+        AutoComplateSearchAdapter autoComplateAdapter = new AutoComplateSearchAdapter(getContext(), keyList);
         et.setAdapter(autoComplateAdapter);
     }
 
     private void initView() {
-        layContentSearch= (LinearLayout) findViewById(R.id.lay_content_search);
-        ivTag= (ImageView) findViewById(R.id.iv_tag);
+        layContentSearch = (LinearLayout) findViewById(R.id.lay_content_search);
+        ivTag = (ImageView) findViewById(R.id.iv_tag);
         ib = (ImageView) findViewById(R.id.iv_del_content);
         iback = (ImageView) findViewById(R.id.iv_back);
         //返回键监听
@@ -197,7 +198,7 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
                 et.setText("");// 设置输入框内容为空
             }
         });
-        search= (Button) findViewById(R.id.btn_content_search);
+        search = (Button) findViewById(R.id.btn_content_search);
         search.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,14 +236,19 @@ public class SearchView extends LinearLayout implements  View.OnKeyListener {
                 hideBtn();// 隐藏按钮
             } else {
                 showBtn();// 显示按钮
-            } searchEvent.onSearch();
+            }
+            //如果搜索间隔时间大于1秒的延迟再搜索
+            if (System.currentTimeMillis() - lastTime > intervalTime) {
+                //1秒延迟后搜索
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        searchEvent.onSearch();
+                    }
+                }, intervalTime);
 
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    searchEvent.onSearch();
-                }
-            },intervalTime);
+               lastTime=System.currentTimeMillis();
+            }
 
         }
     };
